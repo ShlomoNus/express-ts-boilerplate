@@ -23,6 +23,8 @@ module.exports = {
     rules: {
         'react/jsx-filename-extension': 0,
         'no-unused-vars': 1,
+        '@typescript-eslint/no-explicit-any': 1,
+        'import/prefer-default-export': 0,
     },
     settings: {
         'import/resolver': {
