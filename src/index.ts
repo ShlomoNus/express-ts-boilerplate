@@ -1,14 +1,15 @@
-import { abc } from './abc';
-import express, { Application, Request, Response } from 'express';
+import express from 'express';
+import { applyRoutes } from 'helpers';
+import { routes } from 'routes';
 
-// Boot express
-const app: Application = express();
-const port = 5000;
+const app = express();
+const PORT = 3000;
+const { json, urlencoded } = express;
+app.use(json());
+app.use(urlencoded({ extended: false }));
 
-// Application routing
-app.use('/', (req: Request, res: Response) => {
-    res.status(200).send({ data: 'Hello from Ornio AS' });
+applyRoutes({ app, routes });
+
+app.listen(PORT, () => {
+    console.log(`Express with Typescript! http://localhost:${PORT}`);
 });
-abc();
-// Start server
-app.listen(port, () => console.log(`Server is listening on port ${port}!`));

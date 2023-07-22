@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "prettier": "prettier --write .",
-        "start": "nodemon src/index.ts"
+        "start": "nodemon"
     },
     "keywords": [],
     "author": "",
@@ -25,6 +25,7 @@
         "nodemon": "^3.0.1",
         "prettier": "^3.0.0",
         "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.2.0",
         "typescript": "^5.1.6"
     },
     "dependencies": {

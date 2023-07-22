@@ -11,8 +11,7 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
-        "baseUrl": "./src/",
-
+        "baseUrl": "src"
     },
     "include": ["src/**/*", ".eslintrc.js"],
     "exclude": ["node_modules", "build"]
