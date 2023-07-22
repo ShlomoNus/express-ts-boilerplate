@@ -8,6 +8,9 @@ module.exports = {
         'airbnb-typescript',
         'plugin:@typescript-eslint/recommended',
         'plugin:import/recommended',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'plugin:import/typescript',
         'plugin:prettier/recommended',
     ],
     parser: '@typescript-eslint/parser',
@@ -25,6 +28,7 @@ module.exports = {
         'import/resolver': {
             node: {
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                moduleDirectory: ['node_modules', 'src/'],
             },
         },
     },
