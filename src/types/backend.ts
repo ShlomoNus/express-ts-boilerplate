@@ -5,9 +5,12 @@ import {
     RequestHandler as Middleware,
 } from 'express';
 
-export type Handler = (req: Request, res: Response) => any;
+export type Handler<TBody = unknown, TParams = unknown, Tquery = unknown> = (
+    req: Request<TParams, unknown, TBody, Tquery>,
+    res: Response
+) => any;
 
-export type RequestWithBody<T = unknown> = Request<unknown, unknown, T>;
+
 
 type Method =
     | 'get'
