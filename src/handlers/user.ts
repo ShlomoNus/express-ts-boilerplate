@@ -1,8 +1,8 @@
 import { addUser } from 'repository';
-import { Handler, RequestWithBody, User } from 'types';
+import { Handler, User } from 'types';
 
 // Example - handler for nested route.
-export const signup: Handler = (req: RequestWithBody<User>, res) => {
+export const signup: Handler<User> = (req, res) => {
     const { username, password } = req.body;
     if (!username?.trim() || !password?.trim()) {
         return res.status(400).send('Bad username or password');
