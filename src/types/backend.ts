@@ -10,8 +10,6 @@ export type Handler<TBody = unknown, TParams = unknown, Tquery = unknown> = (
     res: Response
 ) => any;
 
-
-
 type Method =
     | 'get'
     | 'head'
