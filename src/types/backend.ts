@@ -5,7 +5,7 @@ import {
     RequestHandler as Middleware,
 } from 'express';
 
-export type Handler<TBody = unknown, TParams = unknown, Tquery = unknown> = (
+export type Handler<TBody = any, TParams = unknown, Tquery = unknown> = (
     req: Request<TParams, unknown, TBody, Tquery>,
     res: Response
 ) => any;
