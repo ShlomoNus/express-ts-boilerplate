@@ -1,7 +1,10 @@
+import { cleanEnv, str, url } from 'envalid';
 import { loadEnvFiles } from 'helpers/vars';
 
 loadEnvFiles();
 
-const config = {};
-
-export default config;
+export const config = cleanEnv(process.env, {
+    Base_Url: url(),
+    Default_End_Point: str(),
+    Test_End_Point: str(),
+});
