@@ -38,5 +38,6 @@
         "mongoose": "^8.1.0",
         "cross-env": "^7.0.3",
         "dotenv": "^16.4.1",
-        "envalid": "^8.0.0"    }
+        "envalid": "^8.0.0"
+    }
 }
