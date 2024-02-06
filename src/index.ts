@@ -1,9 +1,6 @@
 import express from 'express';
 import { applyRoutes } from 'helpers';
-import { loadEnvFiles } from 'helpers/vars';
 import { routes } from 'routes';
-
-loadEnvFiles();
 
 const app = express();
 const PORT = 3000;
