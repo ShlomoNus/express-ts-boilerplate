@@ -1,6 +1,6 @@
 import { Handler } from 'sn-types-backend';
 import { addUser } from 'repository';
-import {  User } from 'types';
+import { User } from 'types';
 
 // Example - handler for nested route.
 export const signup: Handler<User> = (req, res) => {
