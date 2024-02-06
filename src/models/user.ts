@@ -27,4 +27,5 @@ UserSchema.virtual('userData').get(function getUserData(this: IUser) {
     return `name is ${this.name}, email ${this.email}`;
 });
 
+UserSchema.index({ email: 1 });
 export const UserModel = model<IUser, IUserModel>('User', UserSchema);
