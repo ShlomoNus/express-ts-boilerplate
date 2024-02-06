@@ -25,6 +25,10 @@ module.exports = {
         'no-unused-vars': 1,
         '@typescript-eslint/no-explicit-any': 1,
         'import/prefer-default-export': 0,
+        'import/no-extraneous-dependencies': [
+            'error',
+            { devDependencies: true },
+        ],
     },
     settings: {
         'import/resolver': {
