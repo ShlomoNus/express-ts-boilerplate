@@ -1,9 +1,10 @@
+import { cleanEnv, num } from 'envalid';
 import { loadEnvFiles } from 'helpers/vars';
 
 loadEnvFiles();
 
-const CONFIG = {
-    PORT: 3000,
-};
+export const CONFIG = cleanEnv(process.env, {
+    Port: num(),
+});
 
 export default CONFIG;
