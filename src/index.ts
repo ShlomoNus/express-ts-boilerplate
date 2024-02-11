@@ -1,19 +1,11 @@
-import express from 'express';
-import { applyRoutes } from 'helpers';
-import { mongodbCreateConnection } from 'helpers/mongo';
+import { server } from 'server';
 import { routes } from 'routes';
-import { config } from 'config';
+import { mongodbCreateConnection } from 'helpers/mongo';
 
-mongodbCreateConnection(config.Base_Url + config.Default_End_Point);
+import { CONFIG } from 'config';
 
-const app = express();
-const PORT = 3000;
-const { json, urlencoded } = express;
-app.use(json());
-app.use(urlencoded({ extended: false }));
+mongodbCreateConnection(CONFIG.Base_Url + CONFIG.Default_End_Point);
 
-applyRoutes({ app, routes });
+const port = CONFIG.Port || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Express with Typescript! http://localhost:${PORT}`);
-});
+server(port, routes);
