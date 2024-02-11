@@ -2,6 +2,8 @@ import { loadEnvFiles } from 'helpers/vars';
 
 loadEnvFiles();
 
-const config = {};
+const CONFIG = {
+    PORT: 3000,
+};
 
-export default config;
+export default CONFIG;
