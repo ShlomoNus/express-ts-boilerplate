@@ -8,6 +8,5 @@ export const CONFIG = cleanEnv(process.env, {
     Default_End_Point: str(),
     Test_End_Point: str(),
     Port: num(),
+    Secret: str(),
 });
-
-export default CONFIG;
