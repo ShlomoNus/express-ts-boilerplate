@@ -3,9 +3,13 @@ import express, { json, urlencoded } from 'express';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
-import { applyRoutes } from 'helpers';
-import { Route } from 'sn-types-backend';
+import 'express-async-errors';
+
 import { Optional } from 'sn-types-general';
+import { Route } from 'sn-types-backend';
+
+import { applyRoutes } from 'helpers';
+import { errorHandlerMiddleware } from 'middleware/error';
 
 const app = express();
 export async function server(
@@ -23,6 +27,7 @@ export async function server(
 
         applyRoutes({ app, routes });
 
+        app.use(errorHandlerMiddleware);
         return http.createServer(app).listen(port, () => {
             console.log(`Express with Typescript! http://localhost:${port}`);
         });
