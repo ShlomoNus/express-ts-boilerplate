@@ -4,6 +4,6 @@ import { loadEnvFiles } from 'helpers/vars';
 loadEnvFiles();
 
 export const CONFIG = cleanEnv(process.env, {
-    Port: num(),
-    Secret: str(),
+    Port: num({ devDefault: 8080 }),
+    Secret: str({ devDefault: '12345' }),
 });
