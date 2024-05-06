@@ -24,7 +24,6 @@ export async function server(
         app.use(compression());
         app.use(json());
         app.use(urlencoded({ extended: false }));
-
         applyRoutes({ app, routes });
 
         app.use(errorHandlerMiddleware);
