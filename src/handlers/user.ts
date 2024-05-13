@@ -4,10 +4,10 @@ import { User } from 'types';
 
 // Example - handler for nested route.
 export const signup: Handler<User> = (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
     if (!username?.trim() || !password?.trim()) {
         return res.status(400).send('Bad username or password');
     }
-    addUser({ username, password });
+    addUser({ username, password, email });
     return res.status(201).send('User created');
 };
