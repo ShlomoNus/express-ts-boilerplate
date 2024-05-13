@@ -1,21 +1,19 @@
 import { Connection, connect } from 'mongoose';
 
-let connection: Connection | undefined;
+export async function mongodbDisconnect(connection: Connection) {
+    connection.close();
+}
 
 export async function mongodbCreateConnection(url: string) {
     const result = await connect(url);
 
-    connection = result.connection;
+    const currentConnection = result.connection;
 
-    connection.on('error', error => {
+    currentConnection.on('error', error => {
         throw new Error(
             `Mongodb faild while connection to ${url} the error is ${error}.`
         );
     });
-}
 
-export async function mongodbDisconnect() {
-    if (connection) {
-        connection.close();
-    }
+    return async () => mongodbDisconnect(currentConnection);
 }

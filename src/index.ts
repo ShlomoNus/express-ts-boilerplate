@@ -1,20 +1,17 @@
 import { server } from 'server';
 import { routes } from 'routes';
-import { mongodbCreateConnection, mongodbDisconnect } from 'helpers/mongo';
+import { mongodbCreateConnection } from 'helpers/mongo';
 
 import { CONFIG } from 'config';
 import { Server } from 'http';
 
-mongodbCreateConnection(CONFIG.Base_Url + CONFIG.Default_End_Point);
+mongodbCreateConnection(CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB);
 
 const port = CONFIG.Port || 3000;
 
 // Add logger and switch the console.logs.
 async function gracefulShutdown(serverInstance: Server) {
     try {
-        console.log('Closing MongoDB connection...');
-        await mongodbDisconnect();
-
         console.log('Closing HTTP server...');
         await serverInstance.close(); // Assuming server.close() exists
 
