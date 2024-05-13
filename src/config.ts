@@ -4,9 +4,8 @@ import { loadEnvFiles } from 'helpers/vars';
 loadEnvFiles();
 
 export const CONFIG = cleanEnv(process.env, {
-    Base_Url: url(),
-    Default_End_Point: str(),
-    Test_End_Point: str(),
-    Port: num({ devDefault: 8080 }),
+    Mongo_Base_Url: url({ devDefault: 'mongodb://127.0.0.1:27017/' }),
+    Mongo_DB: str({ devDefault: 'test' }),
+    Port: num({ devDefault: 5050 }),
     Secret: str({ devDefault: '12345' }),
 });
