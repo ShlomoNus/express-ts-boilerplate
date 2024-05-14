@@ -1,13 +1,16 @@
 import { Handler } from 'sn-types-backend';
 import { addUser } from 'repository';
 import { User } from 'types';
+import { BadRequestError } from 'helpers/error';
 
 // Example - handler for nested route.
-export const signup: Handler<User> = (req, res) => {
+
+export const signup: Handler<User> = async (req, res) => {
     const { username, password, email } = req.body;
-    if (!username?.trim() || !password?.trim()) {
-        return res.status(400).send('Bad username or password');
+
+    const result = await addUser({ username, password, email });
+    if (!result.status) {
+        throw new BadRequestError(result.message);
     }
-    addUser({ username, password, email });
-    return res.status(201).send('User created');
+    return res.status(result.statusCode).send(result.payload);
 };
