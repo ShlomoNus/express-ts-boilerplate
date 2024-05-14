@@ -4,20 +4,18 @@ import { StatusCodes } from 'http-status-codes';
 
 export const errorHandlerMiddleware: ErrorRequestHandler = (
     err,
-    req,
+    _,
     res,
     next
 ) => {
-    const customError = {
-        msg: 'Something went wrong, please try again',
-        statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-    };
+    let message = 'Something went wrong, please try again';
+    let statusCode = StatusCodes.INTERNAL_SERVER_ERROR;
 
     if (err instanceof CustomAPIError) {
-        customError.msg = err.message;
-        customError.statusCode = err.statusCode;
+        message = err.message;
+        statusCode = err.statusCode;
     }
 
-    res.status(customError.statusCode).json({ msg: customError.msg });
+    res.status(statusCode).json({ message });
     next();
 };
