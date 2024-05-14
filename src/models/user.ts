@@ -1,13 +1,13 @@
 import { model, Schema, Model } from 'mongoose';
 
 interface IUser {
-    name: string;
+    username: string;
     password: string;
     email: string;
 }
 
 const UserSchema = new Schema<IUser>({
-    name: { type: 'String', required: true },
+    username: { type: 'String', required: true },
     password: { type: 'String', required: true },
     email: { type: 'String', required: true, unique: true },
 });
@@ -24,7 +24,7 @@ UserSchema.statics.findByEmail = function findByEmail(
 };
 
 UserSchema.virtual('userData').get(function getUserData(this: IUser) {
-    return `name is ${this.name}, email ${this.email}`;
+    return `name is ${this.username}, email ${this.email}`;
 });
 
 UserSchema.index({ email: 1 });
