@@ -38,6 +38,8 @@ export default tseslint.config(
             '@typescript-eslint/no-explicit-any': 'warn',
             '@typescript-eslint/explicit-module-boundary-types': 'off',
             'no-debugger': 'warn',
+            'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+            'no-control-regex': 'off',
             'arrow-body-style': ['error', 'as-needed'],
             '@typescript-eslint/naming-convention': [
                 'error',
