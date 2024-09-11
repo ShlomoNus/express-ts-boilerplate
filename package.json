@@ -5,8 +5,13 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "pre": "prettier --write .",
-        "dev": "cross-env NODE_ENV=development nodemon"
+        "dev": "cross-env NODE_ENV=development nodemon",
+        "prettier": "prettier --check .",
+        "prettier-fix": "prettier --write .",
+        "lint": "npx eslint",
+        "lint-fix": "npx  eslint --fix ",
+        "check": "npm run lint && npm run prettier",
+        "fix": "npm run lint-fix && npm run prettier-fix"
     },
     "keywords": [],
     "author": "",
