@@ -10,8 +10,17 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
-        "baseUrl": "./src"
-    },
+"baseUrl": ".",
+"paths": {
+    "@utils/*": ["src/utils/*"],
+    "@types/*": ["src/types/*"],
+    "@routes/*": ["src/routes/*"],
+    "@repository/*": ["src/repository/*"],
+    "@models/*": ["src/models/*"],
+    "@middleware/*": ["src/middleware/*"],
+    "@controller/*": ["src/controller/*"]}
+
+},
     "include": [
         "src/**/*",
         "eslint.config.mjs",

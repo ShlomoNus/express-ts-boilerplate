@@ -1,8 +1,8 @@
-import { server } from 'server';
-import { routes } from 'routes';
-import { mongodbCreateConnection } from 'utils/mongo';
-import { CONFIG } from 'config';
+import { mongodbCreateConnection } from '@utils/mongo';
 import { Server } from 'http';
+import { CONFIG } from './config';
+import { server } from './server';
+import { routes } from '@routes/main';
 
 mongodbCreateConnection(CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB).catch(
     error => {
