@@ -1,6 +1,6 @@
-import { getUser } from 'repository';
+import { getUser } from '@repository/users';
 import { Handler } from 'sn-types-backend';
-import { User } from 'types';
+import { User } from 'types/user';
 
 // Change logic as you wish.
 export const login: Handler<User> = (req, res) => {

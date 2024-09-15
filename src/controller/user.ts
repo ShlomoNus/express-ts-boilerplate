@@ -1,7 +1,7 @@
+import { addUser } from '@repository/users';
+import { BadRequestError } from '@utils/error';
 import { Handler } from 'sn-types-backend';
-import { addUser } from 'repository';
-import { User } from 'types';
-import { BadRequestError } from 'helpers/error';
+import { User } from 'types/user';
 
 // Example - handler for nested route.
 

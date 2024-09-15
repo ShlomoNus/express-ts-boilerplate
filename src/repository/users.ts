@@ -1,10 +1,10 @@
+import { userModel } from '@models/user';
+import { mongodbCreateConnection } from '@utils/mongo';
+import { convertType } from '@utils/types';
 import { StatusCodes } from 'http-status-codes';
-import { CONFIG } from 'config';
-import { convertType } from 'utils';
-import { mongodbCreateConnection } from 'utils/mongo';
-import { userModel } from 'models/user';
 import { Result } from 'sn-types-general';
-import { User } from 'types';
+import { CONFIG } from 'src/config';
+import { User } from 'types/user';
 
 // Change it to your own source db, json ect ect.
 const users: User[] = [];
