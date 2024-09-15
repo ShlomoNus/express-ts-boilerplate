@@ -6,7 +6,7 @@ import cors from 'cors';
 import 'express-async-errors';
 import { Optional } from 'sn-types-general';
 import { Route } from 'sn-types-backend';
-import { applyRoutes } from 'helpers';
+import { applyRoutes } from 'utils';
 import { errorHandlerMiddleware } from 'middleware/error';
 
 const app = express();

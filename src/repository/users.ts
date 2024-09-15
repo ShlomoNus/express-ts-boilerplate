@@ -1,7 +1,7 @@
 import { StatusCodes } from 'http-status-codes';
 import { CONFIG } from 'config';
-import { convertType } from 'helpers';
-import { mongodbCreateConnection } from 'helpers/mongo';
+import { convertType } from 'utils';
+import { mongodbCreateConnection } from 'utils/mongo';
 import { userModel } from 'models/user';
 import { Result } from 'sn-types-general';
 import { User } from 'types';

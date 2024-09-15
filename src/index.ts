@@ -1,6 +1,6 @@
 import { server } from 'server';
 import { routes } from 'routes';
-import { mongodbCreateConnection } from 'helpers/mongo';
+import { mongodbCreateConnection } from 'utils/mongo';
 import { CONFIG } from 'config';
 import { Server } from 'http';
 
