@@ -1,25 +1,28 @@
 import { server } from 'server';
 import { routes } from 'routes';
 import { mongodbCreateConnection } from 'helpers/mongo';
-
 import { CONFIG } from 'config';
 import { Server } from 'http';
 
-mongodbCreateConnection(CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB);
+mongodbCreateConnection(CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB).catch(
+    error => {
+        console.error(error);
+    }
+);
 
 const port = CONFIG.Port || 3000;
 
 // Add logger and switch the console.logs.
 async function gracefulShutdown(serverInstance: Server) {
     try {
-        console.log('Closing HTTP server...');
+        console.info('Closing HTTP server...');
         await serverInstance.close(); // Assuming server.close() exists
 
         await new Promise(resolve => {
             setTimeout(resolve, 500);
         }); // Allow time for connections to close
 
-        console.log('Server shut down gracefully.');
+        console.info('Server shut down gracefully.');
     } catch (error) {
         console.error('Error during graceful shutdown:', error);
     }
@@ -32,19 +35,30 @@ async function run() {
         if (httpServer) {
             console.log(`Server listening on port ${port}`);
 
-            // Graceful shutdown handling (assuming server.close() exists)
-            process.on('SIGTERM', async () => {
-                console.log(
-                    'Received SIGTERM signal, shutting down gracefully...'
-                );
-                await gracefulShutdown(httpServer);
+            process.on('SIGTERM', () => {
+                void (async () => {
+                    try {
+                        console.log(
+                            'Received SIGTERM signal, shutting down gracefully...'
+                        );
+                        await gracefulShutdown(httpServer);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                })();
             });
 
-            process.on('SIGINT', async () => {
-                console.log(
-                    'Received SIGINT signal (Ctrl+C), shutting down gracefully...'
-                );
-                await gracefulShutdown(httpServer);
+            process.on('SIGINT', () => {
+                void (async () => {
+                    try {
+                        console.log(
+                            'Received SIGTERM signal, shutting down gracefully...'
+                        );
+                        await gracefulShutdown(httpServer);
+                    } catch (error) {
+                        console.error(error);
+                    }
+                })();
             });
         } else {
             console.error('Server failed to start.');
@@ -54,4 +68,6 @@ async function run() {
     }
 }
 
-run(); // Start the serve
+run().catch(err => {
+    console.error(err);
+}); // Start the serve

@@ -1,7 +1,7 @@
 import { Connection, connect } from 'mongoose';
 
 export async function mongodbDisconnect(connection: Connection) {
-    connection.close();
+    await connection.close();
 }
 
 export async function mongodbCreateConnection(url: string) {

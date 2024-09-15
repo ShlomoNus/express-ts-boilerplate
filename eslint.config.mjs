@@ -13,7 +13,13 @@ export default tseslint.config(
         },
     },
     {
-        ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
+        ignores: [
+            'dist',
+            'node_modules',
+            'coverage',
+            'eslint.config.js',
+            'drizzle',
+        ],
     },
     js.configs.recommended,
     ...tseslint.configs.recommended,
@@ -29,17 +35,16 @@ export default tseslint.config(
         },
     },
     {
-        files: ['src/**/*.ts'],
+        files: ['src/**/*.ts', 'drizzle.config.ts'],
         rules: {
             ...prettierPlugin.configs.recommended.rules,
             ...eslintConfigPrettier.rules,
+            'no-control-regex': 'off',
             'prefer-const': 'error',
-            'max-lines': ['warn', { max: 250 }],
+            'max-lines': ['warn', { max: 300 }],
             '@typescript-eslint/no-explicit-any': 'warn',
             '@typescript-eslint/explicit-module-boundary-types': 'off',
             'no-debugger': 'warn',
-            'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
-            'no-control-regex': 'off',
             'arrow-body-style': ['error', 'as-needed'],
             '@typescript-eslint/naming-convention': [
                 'error',

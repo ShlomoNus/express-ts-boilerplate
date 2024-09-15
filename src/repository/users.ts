@@ -1,13 +1,12 @@
 import { StatusCodes } from 'http-status-codes';
-
 import { CONFIG } from 'config';
-import { ConvertType } from 'helpers';
+import { convertType } from 'helpers';
 import { mongodbCreateConnection } from 'helpers/mongo';
-import { UserModel } from 'models/user';
+import { userModel } from 'models/user';
 import { Result } from 'sn-types-general';
 import { User } from 'types';
 
-// change it to your own source db, json ect ect.
+// Change it to your own source db, json ect ect.
 const users: User[] = [];
 
 export const addUser = async (newUser: User) => {
@@ -16,8 +15,10 @@ export const addUser = async (newUser: User) => {
     );
 
     let result: Result<string>;
+
     try {
-        const createdUser = new UserModel({ ...newUser });
+        const createdUser = new userModel({ ...newUser });
+
         await createdUser.save();
         result = {
             status: true,
@@ -25,7 +26,8 @@ export const addUser = async (newUser: User) => {
             statusCode: StatusCodes.CREATED,
         };
     } catch (error: unknown) {
-        const typedError = ConvertType<Error>(error);
+        const typedError = convertType<Error>(error);
+
         result = {
             status: false,
             message: typedError.message,
@@ -38,8 +40,7 @@ export const addUser = async (newUser: User) => {
     return result;
 };
 
-export const getUser = (user: User) => {
-    return users.find(
+export const getUser = (user: User) =>
+    users.find(
         u => u.username === user.username && u.password === user.password
     );
-};
