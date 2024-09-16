@@ -1,5 +1,5 @@
 import { login } from '@controller/auth';
-import { signup } from '@controller/user';
+import { getUser, signup } from '@controller/user';
 import { requestLogger } from '@middleware/requestLogger';
 import { Route } from 'sn-types-backend';
 
@@ -16,5 +16,11 @@ export const routes: Route[] = [
         path: '/login',
         middleware: [requestLogger],
         handler: login,
+    },
+    {
+        method: 'get',
+        path: '/test',
+        middleware: [],
+        handler: getUser,
     },
 ];

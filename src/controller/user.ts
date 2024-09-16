@@ -16,3 +16,6 @@ export const signup: Handler<User> = async (req, res) => {
 
     return res.status(result.statusCode).send(result.payload);
 };
+
+export const getUser: Handler<User> = (_req, res) =>
+    res.status(200).send({ name: 'John Doe', age: 30 });
