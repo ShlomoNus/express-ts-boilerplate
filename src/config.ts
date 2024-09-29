@@ -1,9 +1,11 @@
-import { cleanEnv, num, str } from 'envalid';
-import { loadEnvFiles } from 'helpers/vars';
+import { loadEnvFiles } from '@utils/vars';
+import { cleanEnv, str, url, num } from 'envalid';
 
 loadEnvFiles();
 
 export const CONFIG = cleanEnv(process.env, {
-    Port: num({ devDefault: 8080 }),
+    Mongo_Base_Url: url({ devDefault: 'mongodb://127.0.0.1:27017/' }),
+    Mongo_DB: str({ devDefault: 'test' }),
+    Port: num({ devDefault: 5050 }),
     Secret: str({ devDefault: '12345' }),
 });

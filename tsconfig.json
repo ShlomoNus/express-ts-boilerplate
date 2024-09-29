@@ -2,8 +2,7 @@
     "compilerOptions": {
         "target": "es2016",
         "module": "commonjs",
-        "outDir": "./build",
-        "rootDir": "./src",
+        "outDir": "./dist",        
         "strict": true,
         "noImplicitAny": true,
         "sourceMap": true,
@@ -11,8 +10,23 @@
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
-        "baseUrl": "src",
-    },
-    "include": ["src/**/*", ".eslintrc.js"],
-    "exclude": ["node_modules", "build"],
+"baseUrl": ".",
+"paths": {
+    "@utils/*": ["src/utils/*"],
+    "types/*": ["src/types/*"],
+    "@routes/*": ["src/routes/*"],
+    "@repository/*": ["src/repository/*"],
+    "@models/*": ["src/models/*"],
+    "@middleware/*": ["src/middleware/*"],
+    "@controller/*": ["src/controller/*"]}
+
+},
+    "include": [
+        "src/**/*",
+        "eslint.config.mjs",
+        "jest.config.js",
+        "jest.config.ts",
+        "jest.setup.ts"
+    ],
+    "exclude": ["node_modules", "build"]
 }

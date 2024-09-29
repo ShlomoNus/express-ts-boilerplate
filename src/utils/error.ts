@@ -58,6 +58,8 @@ export const errorsObject = {
 type ErrorsNames = keyof typeof errorsObject;
 
 export function getErrorByName(errorsName: ErrorsNames, message: string) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const SelectedClass = errorsObject[errorsName];
+
     return new SelectedClass(message);
 }

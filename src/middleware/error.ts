@@ -1,5 +1,5 @@
+import { CustomAPIError } from '@utils/error';
 import { ErrorRequestHandler } from 'express';
-import { CustomAPIError } from 'helpers/error';
 import { StatusCodes } from 'http-status-codes';
 
 export const errorHandlerMiddleware: ErrorRequestHandler = (
