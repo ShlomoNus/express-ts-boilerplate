@@ -41,6 +41,4 @@ export const addUser = async (newUser: User) => {
 };
 
 export const getUser = (user: User) =>
-    users.find(
-        u => u.username === user.username && u.password === user.password
-    );
+    users.find(u => u.username === user.username && u.password === user.password);

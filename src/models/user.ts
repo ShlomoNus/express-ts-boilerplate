@@ -17,9 +17,7 @@ interface IUserModel extends Model<IUser> {
 }
 
 // Add model function
-userSchema.statics.findByEmail = async function findByEmail(
-    email: string
-): Promise<IUser | null> {
+userSchema.statics.findByEmail = async function findByEmail(email: string): Promise<IUser | null> {
     return this.findOne({ email }).exec();
 };
 

@@ -11,10 +11,7 @@ import { errorHandlerMiddleware } from '@middleware/error';
 
 const app = express();
 
-export async function server(
-    port: number,
-    routes: Route[]
-): Promise<Optional<http.Server>> {
+export async function server(port: number, routes: Route[]): Promise<Optional<http.Server>> {
     try {
         app.use(helmet());
 
