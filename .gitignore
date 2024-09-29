@@ -3,4 +3,4 @@ dist
 lambda_function.zip
 src/coverage
 coverage
-.env.**
+.env*
