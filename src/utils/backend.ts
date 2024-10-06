@@ -9,6 +9,6 @@ export function applyRoutes({ app, routes }: ApplyRoutesParams) {
     routes.forEach(route => {
         const { method, path, middleware, handler } = route;
 
-        workAround[method](path, [...middleware], handler);
+        workAround[method](path, [...(middleware ?? [])], handler);
     });
 }
