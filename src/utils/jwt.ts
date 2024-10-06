@@ -1,5 +1,5 @@
-import { CONFIG } from 'config';
 import { sign, verify } from 'jsonwebtoken';
+import { CONFIG } from 'src/config';
 
 const secret = CONFIG.Secret || 'secret';
 
