@@ -8,8 +8,5 @@ const userRouter = Router();
 export const routes: Route[] = [{ path: '/get', method: 'get', handler: getUser }];
 
 applyRoutes({ app: userRouter, routes });
-userRouter.get('/create', (_, res) => {
-    res.send('kajdia');
-});
 
 export { userRouter };
