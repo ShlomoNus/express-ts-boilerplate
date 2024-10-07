@@ -1,6 +1,3 @@
-/* eslint-disable max-classes-per-file */
-/* eslint-disable @typescript-eslint/no-useless-constructor */
-
 import { StatusCodes } from 'http-status-codes';
 
 type DefaultErrorConstractorInputObject = {

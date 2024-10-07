@@ -9,8 +9,9 @@ export const errorHandlerMiddleware: ErrorRequestHandler = (err, _, res, next) =
     if (err instanceof CustomAPIError) {
         message = err.message;
         statusCode = err.statusCode;
+
+        return res.status(statusCode).json({ message });
     }
 
-    res.status(statusCode).json({ message });
     next();
 };
