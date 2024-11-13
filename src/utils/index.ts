@@ -6,8 +6,6 @@ export * from './error';
 
 export * from './jwt';
 
-export * from './mongo';
-
 export * from './password';
 
 export * from './path';
