@@ -1,12 +1,12 @@
-import { addUser, getUser } from '@repository/users';
+import { addUser, validateUser } from '@repository/users';
 import { BadRequestError } from '@utils/error';
 import { Handler } from 'sn-types-backend';
-import { User } from 'types/user';
+import { SelectUser } from 'src/db/schema';
 
 // Change logic as you wish.
-export const login: Handler<User> = (req, res) => {
+export const login: Handler<SelectUser> = async (req, res) => {
     const { username, password, email } = req.body;
-    const found = getUser({ username, password, email });
+    const found = await validateUser({ username, password, email });
 
     if (!found) {
         return res.status(401).send('Login failed');
@@ -15,7 +15,7 @@ export const login: Handler<User> = (req, res) => {
     return res.status(200).send('Success');
 };
 
-export const signup: Handler<User> = async (req, res) => {
+export const signup: Handler<SelectUser> = async (req, res) => {
     const { username, password, email } = req.body;
 
     const result = await addUser({ username, password, email });
