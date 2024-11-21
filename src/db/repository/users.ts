@@ -1,4 +1,4 @@
-import { convertType } from '@utils/types';
+import { convertToError } from '@utils/types';
 import { StatusCodes } from 'http-status-codes';
 import { Result } from 'sn-types-general';
 import { InsertUser, SelectUser, usersTable } from '../schema';
@@ -16,7 +16,7 @@ async function addUser(newUser: InsertUser) {
             statusCode: StatusCodes.CREATED,
         };
     } catch (error: unknown) {
-        const typedError = convertType<Error>(error);
+        const typedError = convertToError(error);
 
         result = {
             status: false,
@@ -40,7 +40,7 @@ async function getUser(id: number) {
             statusCode: StatusCodes.OK,
         };
     } catch (error: unknown) {
-        const typedError = convertType<Error>(error);
+        const typedError = convertToError(error);
 
         result = {
             status: false,
@@ -68,7 +68,7 @@ async function findUser(user: Pick<InsertUser, 'email' | 'username'>) {
             statusCode: StatusCodes.OK,
         };
     } catch (error: unknown) {
-        const typedError = convertType<Error>(error);
+        const typedError = convertToError(error);
 
         result = {
             status: false,
@@ -102,7 +102,7 @@ async function validateUser(user: InsertUser) {
             statusCode: StatusCodes.OK,
         };
     } catch (error: unknown) {
-        const typedError = convertType<Error>(error);
+        const typedError = convertToError(error);
 
         result = {
             status: false,

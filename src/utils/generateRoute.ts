@@ -1,7 +1,7 @@
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
-import { convertType } from './types';
+import { convertToError } from './types';
 import { mainDirectory } from './path';
 
 const generateRouteFile = async () => {
@@ -39,7 +39,7 @@ export { ${givenName}Router };
         fs.writeFileSync(filePath, fileContent, 'utf8');
         console.log(`Route file created: ${filePath}`);
     } catch (error: unknown) {
-        const typedError = convertType<Error>(error);
+        const typedError = convertToError(error);
 
         console.error('Error creating route file:', typedError.message);
     }
