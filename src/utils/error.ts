@@ -1,18 +1,20 @@
-/* eslint-disable max-classes-per-file */
-/* eslint-disable @typescript-eslint/no-useless-constructor */
-
 import { StatusCodes } from 'http-status-codes';
+import { Failed } from 'sn-types-general';
 
 type DefaultErrorConstractorInputObject = {
     message: string;
     statusCode: number;
 };
 
-export class CustomAPIError extends Error {
+export class CustomAPIError implements Failed {
+    message: string;
+
     statusCode: number;
 
+    status = false as const;
+
     constructor({ message, statusCode }: DefaultErrorConstractorInputObject) {
-        super(message);
+        this.message = message;
         this.statusCode = statusCode;
     }
 }
@@ -58,6 +60,8 @@ export const errorsObject = {
 type ErrorsNames = keyof typeof errorsObject;
 
 export function getErrorByName(errorsName: ErrorsNames, message: string) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const SelectedClass = errorsObject[errorsName];
+
     return new SelectedClass(message);
 }
