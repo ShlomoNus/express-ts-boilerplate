@@ -13,12 +13,13 @@
         "baseUrl": ".",
         "paths": {
             "@utils/*": ["src/utils/*"],
-            "types/*": ["src/types/*"],
+            "@types/*": ["src/types/*"],
             "@routes/*": ["src/routes/*"],
             "@repository/*": ["src/db/repository/*"],
             "@models/*": ["src/models/*"],
             "@middleware/*": ["src/middleware/*"],
             "@handlers/*": ["src/handlers/*"],
+            "@db/*": ["src/db/*"],
         },
     },
     "include": [
