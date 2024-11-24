@@ -1,17 +1,16 @@
-import { addUser, validateUser } from '@repository/users';
+import { findUser,addUser } from '@repository/users';
+import { IUser } from '@src/types/user';
 import { BadRequestError, NotFoundError } from '@utils/error';
 import { convertToError } from '@utils/types';
 import { HttpStatusCode } from 'axios';
 import { Handler } from 'sn-types-backend';
-import { SelectUser } from 'src/db/schema';
 
-type LoginUser = Omit<SelectUser, 'id'>;
 
-export const login: Handler<LoginUser> = async (req, res) => {
+export const login: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
 
     try {
-        const found = await validateUser({ username, password, email });
+        const found = await findUser({ username, password, email });
 
         if (!found) {
             return res.status(401).json({ message: '' });
@@ -33,7 +32,7 @@ export const resetPassword: Handler<{ email: string }> = async (req, res) => {
     return res.status(HttpStatusCode.Ok).send(email);
 };
 
-export const signup: Handler<LoginUser> = async (req, res) => {
+export const signup: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
 
     const result = await addUser({ username, password, email });
@@ -45,7 +44,7 @@ export const signup: Handler<LoginUser> = async (req, res) => {
     return res.status(result.statusCode).send(result.payload);
 };
 
-export const getUser: Handler<LoginUser> = async (req, res) => {
+export const getUser: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
 
     const result = await addUser({ username, password, email });

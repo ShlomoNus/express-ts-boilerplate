@@ -1,10 +1,6 @@
+import { IUser } from '@src/types/user';
 import { model, Schema, Model } from 'mongoose';
 
-interface IUser {
-    username: string;
-    password: string;
-    email: string;
-}
 
 const UserSchema = new Schema<IUser>({
     username: { type: 'String', required: true },
@@ -16,10 +12,8 @@ interface IUserModel extends Model<IUser> {
     findByTitle(title: string): Promise<IUser | null>;
 }
 
-// add model function
-UserSchema.statics.findByEmail = function findByEmail(
-    email: string
-): Promise<IUser | null> {
+// Add model function
+UserSchema.statics.findByEmail = async function findByEmail(email: string): Promise<IUser | null> {
     return this.findOne({ email }).exec();
 };
 

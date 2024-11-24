@@ -1,23 +1,25 @@
+import { UserModel } from '@models/user';
+import { CONFIG } from '@src/config';
+import { IUser } from '@src/types/user';
+import { convertToError, convertType } from '@utils/types';
 import { StatusCodes } from 'http-status-codes';
-
-import { CONFIG } from 'config';
-import { ConvertType } from 'helpers';
-import { mongodbCreateConnection } from 'helpers/mongo';
-import { UserModel } from 'models/user';
 import { Result } from 'sn-types-general';
-import { User } from 'types';
+import { mongodbCreateConnection } from 'src/helpers/mongo';
 
-// change it to your own source db, json ect ect.
-const users: User[] = [];
+// Change it to your own source db, json ect ect.
+const users: IUser[] = [];
 
-export const addUser = async (newUser: User) => {
+
+export const addUser = async (newUser: IUser) => {
     const disconnectFunction = await mongodbCreateConnection(
         CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB
     );
 
     let result: Result<string>;
+
     try {
         const createdUser = new UserModel({ ...newUser });
+
         await createdUser.save();
         result = {
             status: true,
@@ -25,7 +27,8 @@ export const addUser = async (newUser: User) => {
             statusCode: StatusCodes.CREATED,
         };
     } catch (error: unknown) {
-        const typedError = ConvertType<Error>(error);
+        const typedError = convertType<Error>(error);
+
         result = {
             status: false,
             message: typedError.message,
@@ -38,8 +41,65 @@ export const addUser = async (newUser: User) => {
     return result;
 };
 
-export const getUser = (user: User) => {
-    return users.find(
-        u => u.username === user.username && u.password === user.password
+
+export async function getUser(id: number) {
+
+    const disconnectFunction = await mongodbCreateConnection(
+        CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB
     );
-};
+    let result: Result<IUser>;
+
+    try {
+        const user = await UserModel.findById(id).lean<IUser>()
+        if(!user){
+            throw new Error(`no user with ${id} id`)
+        }
+        result = {
+            status: true,
+            payload: user,
+            statusCode: StatusCodes.OK,
+        };
+    } catch (error: unknown) {
+        const typedError = convertToError(error);
+
+        result = {
+            status: false,
+            message: typedError.message,
+            statusCode: StatusCodes.BAD_REQUEST,
+        };
+    }
+
+    await disconnectFunction();
+
+    return result;
+}
+
+export async function findUser(user:IUser) {
+    const disconnectFunction = await mongodbCreateConnection(
+        CONFIG.Mongo_Base_Url + CONFIG.Mongo_DB
+    );
+    let result: Result<IUser>;
+
+    try {
+        const foundUser = await UserModel.find({...user}).lean<IUser>()
+        if(!user){
+            throw new Error('please check again the provided user info')
+        }
+        result = {
+            status: true,
+            payload: foundUser,
+            statusCode: StatusCodes.OK,
+        };
+    } catch (error: unknown) {
+        const typedError = convertToError(error);
+
+        result = {
+            status: false,
+            message: typedError.message,
+            statusCode: StatusCodes.BAD_REQUEST,
+        };
+    }
+
+    return result;
+}
+

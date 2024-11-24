@@ -1,5 +1,5 @@
+import { loadEnvFiles } from '@utils/vars';
 import { cleanEnv, str, url, num } from 'envalid';
-import { loadEnvFiles } from 'helpers/vars';
 
 loadEnvFiles();
 
