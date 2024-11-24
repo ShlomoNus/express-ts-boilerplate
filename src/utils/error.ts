@@ -1,15 +1,20 @@
 import { StatusCodes } from 'http-status-codes';
+import { Failed } from 'sn-types-general';
 
 type DefaultErrorConstractorInputObject = {
     message: string;
     statusCode: number;
 };
 
-export class CustomAPIError extends Error {
+export class CustomAPIError implements Failed {
+    message: string;
+
     statusCode: number;
 
+    status = false as const;
+
     constructor({ message, statusCode }: DefaultErrorConstractorInputObject) {
-        super(message);
+        this.message = message;
         this.statusCode = statusCode;
     }
 }
