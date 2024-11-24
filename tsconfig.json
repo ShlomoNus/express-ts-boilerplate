@@ -21,6 +21,7 @@
             "@middleware/*": ["src/middleware/*"],
             "@handlers/*": ["src/handlers/*"],
             "@db/*": ["src/db/*"],
+            "@src/*": ["src/*"],
         },
     },
     "include": [
