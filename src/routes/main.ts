@@ -1,5 +1,5 @@
 import { login } from 'src/handlers/auth';
-import { signup } from '@handlers/user';
+import { signup } from '@handlers/auth';
 import { requestLogger } from '@middleware/requestLogger';
 import { Route } from 'sn-types-backend';
 import { userRouter } from './user';

@@ -1,4 +1,4 @@
-import { getUser } from '@handlers/user';
+import { getUser } from '@handlers/auth';
 import { applyRoutes } from '@utils/backend';
 import { Router } from 'express';
 import { Route } from 'sn-types-backend';
