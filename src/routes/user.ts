@@ -1,7 +1,7 @@
 import { getUser } from '@handlers/auth';
 import { applyRoutes } from '@utils/backend';
 import { Router } from 'express';
-import { Route } from 'sn-types-backend';
+import { Route } from 'shen-types';
 
 const userRouter = Router();
 

@@ -25,7 +25,7 @@ const generateRouteFile = async () => {
         const fileContent = `
 import { applyRoutes } from '@utils/backend';
 import { Router } from 'express';
-import { Route } from 'sn-types-backend';
+import { Route } from 'shen-types';
 
 const ${givenName}Router = Router();
 

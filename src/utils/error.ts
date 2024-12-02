@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { Failed } from 'sn-types-general';
+import { Failed } from 'shen-types';
 
 type DefaultErrorConstractorInputObject = {
     message: string;

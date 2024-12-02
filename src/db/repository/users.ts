@@ -1,9 +1,9 @@
 import { convertToError } from '@utils/types';
 import { StatusCodes } from 'http-status-codes';
-import { Result } from 'sn-types-general';
 import { InsertUser, SelectUser, usersTable } from '../schema';
 import { db } from '..';
 import { and, eq } from 'drizzle-orm';
+import { Result } from 'shen-types';
 
 async function addUser(newUser: InsertUser) {
     let result: Result<string>;

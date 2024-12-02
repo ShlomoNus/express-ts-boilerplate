@@ -1,5 +1,5 @@
 import { Application, Router } from 'express';
-import { Route } from 'sn-types-backend';
+import { Route } from 'shen-types';
 
 type ApplyRoutesParams = { app: Application | Router; routes: Route[] };
 
