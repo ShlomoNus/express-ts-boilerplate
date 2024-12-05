@@ -1,6 +1,6 @@
 import { verifyJwt } from '@utils/jwt';
 import { StatusCodes, ReasonPhrases } from 'http-status-codes';
-import { Middleware } from 'shen-types';
+import { Middleware } from 'sn-types-backend';
 
 export const protect: Middleware = async (req, res, next) => {
     let token;

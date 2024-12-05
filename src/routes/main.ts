@@ -2,7 +2,7 @@ import { login } from 'src/handlers/auth';
 import { signup } from '@handlers/auth';
 import { requestLogger } from '@middleware/requestLogger';
 import { userRouter } from './user';
-import { Route } from 'shen-types';
+import { Route } from 'sn-types-backend';
 
 export const routes: Route[] = [
     {

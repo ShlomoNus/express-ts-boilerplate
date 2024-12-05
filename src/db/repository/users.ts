@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { InsertUser, SelectUser, usersTable } from '../schema';
 import { db } from '..';
 import { and, eq } from 'drizzle-orm';
-import { Result } from 'shen-types';
+import { Result } from 'sn-types-general';
 
 async function addUser(newUser: InsertUser) {
     let result: Result<string>;

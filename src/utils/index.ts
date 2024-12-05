@@ -2,8 +2,6 @@ export * from './apis';
 
 export * from './backend';
 
-export * from './error';
-
 export * from './jwt';
 
 export * from './password';

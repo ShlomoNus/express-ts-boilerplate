@@ -5,7 +5,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import 'express-async-errors';
 import { applyRoutes } from '@utils/backend';
-import { Optional, Route } from 'shen-types';
+import { Route } from 'sn-types-backend';
+import { Optional } from 'sn-types-general';
 
 const app = express();
 
