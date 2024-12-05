@@ -1,9 +1,9 @@
 import { addUser, validateUser } from '@repository/users';
-import { BadRequestError, NotFoundError } from '@utils/error';
 import { convertToError } from '@utils/types';
 import { HttpStatusCode } from 'axios';
 import { Handler } from 'sn-types-backend';
 import { SelectUser } from 'src/db/schema';
+import { BadRequestError, NotFoundError } from 'sn-utils-http';
 
 type LoginUser = Omit<SelectUser, 'id'>;
 
