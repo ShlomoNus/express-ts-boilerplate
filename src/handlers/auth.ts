@@ -1,10 +1,9 @@
-import { findUser,addUser } from '@repository/users';
-import { IUser } from '@src/types/user';
-import { BadRequestError, NotFoundError } from '@utils/error';
+import { findUser, addUser } from '@repository/users';
+import { BadRequestError, NotFoundError } from 'sn-utils-http';
 import { convertToError } from '@utils/types';
 import { HttpStatusCode } from 'axios';
 import { Handler } from 'sn-types-backend';
-
+import { IUser } from '@src/types/user';
 
 export const login: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;

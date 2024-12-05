@@ -1,8 +1,7 @@
 import { IUser } from '@src/types/user';
 import { model, Schema, Model } from 'mongoose';
 
-
-const UserSchema = new Schema<IUser>({
+const userSchema = new Schema<IUser>({
     username: { type: 'String', required: true },
     password: { type: 'String', required: true },
     email: { type: 'String', required: true, unique: true },
@@ -13,14 +12,14 @@ interface IUserModel extends Model<IUser> {
 }
 
 // Add model function
-UserSchema.statics.findByEmail = async function findByEmail(email: string): Promise<IUser | null> {
+userSchema.statics.findByEmail = async function findByEmail(email: string): Promise<IUser | null> {
     return this.findOne({ email }).exec();
 };
 
-UserSchema.virtual('userData').get(function getUserData(this: IUser) {
+userSchema.virtual('userData').get(function getUserData(this: IUser) {
     return `name is ${this.username}, email ${this.email}`;
 });
 
-UserSchema.index({ email: 1 });
+userSchema.index({ email: 1 });
 
-export const UserModel = model<IUser, IUserModel>('User', UserSchema);
+export const userModel = model<IUser, IUserModel>('User', userSchema);
