@@ -5,15 +5,14 @@ import { routes } from '@routes/main';
 
 const port = CONFIG.Port || 3000;
 
-// Add logger and switch the console.logs.
 async function gracefulShutdown(serverInstance: Server) {
     try {
         console.info('Closing HTTP server...');
-        await serverInstance.close(); // Assuming server.close() exists
+        await serverInstance.close();
 
         await new Promise(resolve => {
             setTimeout(resolve, 500);
-        }); // Allow time for connections to close
+        });
 
         console.info('Server shut down gracefully.');
     } catch (error) {
@@ -59,4 +58,4 @@ async function run() {
 
 run().catch(err => {
     console.error(err);
-}); // Start the serve
+}); //
