@@ -4,6 +4,6 @@
     "exec": "node --inspect -r tsconfig-paths/register -r ts-node/register",
     "ext": "ts,js",
     "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "dev"
     }
 }

@@ -11,7 +11,7 @@
             "console": "integratedTerminal",
             "runtimeArgs": ["--inspect"],
             "env": {
-                "NODE_ENV": "development"
+                "NODE_ENV": "dev"
             },
             "sourceMaps": true,
             "internalConsoleOptions": "neverOpen"
