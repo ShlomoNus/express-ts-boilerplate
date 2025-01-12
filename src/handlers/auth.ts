@@ -1,9 +1,11 @@
-import { findUser, addUser } from '@repository/users';
+import { UserRepository } from 'sn-mongo-rml';
 import { BadRequestError, NotFoundError } from 'sn-utils-http';
 import { convertToError } from '@utils/types';
 import { HttpStatusCode } from 'axios';
 import { Handler } from 'sn-types-backend';
 import { IUser } from '@src/types/user';
+
+const { addUser, findUser } = new UserRepository({ baseUrl: '', dbName: '' });
 
 export const login: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
