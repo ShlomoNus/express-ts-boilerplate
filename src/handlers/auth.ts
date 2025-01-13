@@ -1,30 +1,31 @@
 import { UserRepository } from 'sn-mongo-rml';
-import { BadRequestError, NotFoundError } from 'sn-utils-http';
-import { convertToError } from '@utils/types';
 import { HttpStatusCode } from 'axios';
 import { Handler } from 'sn-types-backend';
 import { IUser } from '@src/types/user';
+import { comparePassword } from '@utils/password';
+import { CONFIG } from '@src/config';
 
-const { addUser, findUser } = new UserRepository({ baseUrl: '', dbName: '' });
+const { BASE_URL, DB_NAME } = CONFIG;
 
 export const login: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
+    const { findUserRepo } = new UserRepository({
+        baseUrl: BASE_URL,
+        dbName: DB_NAME,
+    });
+    const found = await findUserRepo({ username, email });
 
-    try {
-        const found = await findUser({ username, password, email });
-
-        if (!found) {
-            return res.status(401).json({ message: '' });
-        }
-
-        return res.status(HttpStatusCode.Ok).send('Success');
-    } catch (error) {
-        const typedError = convertToError(error);
-
-        const notFoundError = new NotFoundError(typedError.message);
-
-        return res.json({ ...notFoundError });
+    if (!found.status) {
+        return res.status(found.statusCode).json({ message: found.message });
     }
+
+    const checkPassword = await comparePassword(password, found.payload.password);
+
+    if (!checkPassword) {
+        return res.status(HttpStatusCode.Unauthorized).json({ message: 'incorrect password' });
+    }
+
+    return res.status(HttpStatusCode.Ok).send('logged in');
 };
 
 export const resetPassword: Handler<{ email: string }> = async (req, res) => {
@@ -36,23 +37,12 @@ export const resetPassword: Handler<{ email: string }> = async (req, res) => {
 export const signup: Handler<IUser> = async (req, res) => {
     const { username, password, email } = req.body;
 
-    const result = await addUser({ username, password, email });
+    console.log('username', username, 'password', password, 'email', email);
+    const { createUserRepo } = new UserRepository({
+        baseUrl: 'mongodb://localhost:27017',
+        dbName: 'localUsers',
+    });
+    const result = await createUserRepo({ username, password, email });
 
-    if (!result.status) {
-        throw new BadRequestError(result.message);
-    }
-
-    return res.status(result.statusCode).send(result.payload);
-};
-
-export const getUser: Handler<IUser> = async (req, res) => {
-    const { username, password, email } = req.body;
-
-    const result = await addUser({ username, password, email });
-
-    if (!result.status) {
-        throw new BadRequestError(result.message);
-    }
-
-    return res.status(result.statusCode).send(result.payload);
+    return res.status(result.statusCode).send('user created');
 };
