@@ -44,5 +44,7 @@ export const signup: Handler<IUser> = async (req, res) => {
     });
     const result = await createUserRepo({ username, password, email });
 
-    return res.status(result.statusCode).send('user created');
+    const response = result.status ? 'user created' : result.message;
+
+    return res.status(result.statusCode).send(response);
 };
