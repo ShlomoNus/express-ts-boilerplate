@@ -3,28 +3,22 @@ import { StatusCodes, ReasonPhrases } from 'http-status-codes';
 import { Middleware } from 'sn-types-backend';
 
 export const protect: Middleware = async (req, res, next) => {
-    let token;
+    let message = `${ReasonPhrases.UNAUTHORIZED} no token provided`;
+    const token =
+        req.headers.authorization && req.headers.authorization.startsWith('Bearer')
+            ? req.headers.authorization.split(' ')[1]
+            : req.cookies.token
+              ? req.cookies.token
+              : null;
 
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    if (token) {
         try {
-            token = req.headers.authorization.split(' ')[1];
-
-            const decoded = verifyJwt(token);
-
-            console.info(decoded);
-
+            verifyJwt(token);
             next();
-        } catch (error) {
-            console.log(error);
-            res.status(StatusCodes.UNAUTHORIZED).json({ message: ReasonPhrases.UNAUTHORIZED });
+        } catch {
+            message = `${ReasonPhrases.UNAUTHORIZED} invalid token`;
         }
     }
 
-    if (!token) {
-        res.status(StatusCodes.UNAUTHORIZED).json({
-            message: `${ReasonPhrases.UNAUTHORIZED}, no token`,
-        });
-
-        return;
-    }
+    return res.status(StatusCodes.UNAUTHORIZED).json({ message });
 };
