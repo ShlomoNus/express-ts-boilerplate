@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import 'express-async-errors';
 import userAgent from 'express-useragent';
+import cookieParser from 'cookie-parser';
 import { applyRoutes } from '@utils/backend';
 import { Route } from 'sn-types-backend';
 import { Optional } from 'sn-types-general';
@@ -16,7 +17,7 @@ export async function server(port: number, routes: Route[]): Promise<Optional<ht
         app.use(helmet());
         app.use(userAgent.express());
         app.use(cors());
-
+        app.use(cookieParser());
         app.use(compression());
         app.use(json());
 
