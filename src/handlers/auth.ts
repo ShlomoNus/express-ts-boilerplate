@@ -4,6 +4,8 @@ import { Handler } from 'sn-types-backend';
 import { IUser } from '@src/types/user';
 import { comparePassword } from '@utils/password';
 import { CONFIG } from '@src/config';
+import { isMoblieValidator } from '@utils/isMoble';
+import { generateJwt } from '@utils/jwt';
 
 const { BASE_URL, DB_NAME } = CONFIG;
 
@@ -44,7 +46,22 @@ export const signup: Handler<IUser> = async (req, res) => {
     });
     const result = await createUserRepo({ username, password, email });
 
-    const response = result.status ? 'user created' : result.message;
+    const message = result.status ? 'user created' : result.message;
 
-    return res.status(result.statusCode).send(response);
+    const token = generateJwt({ username, email });
+
+    const isMoblie = isMoblieValidator(req);
+
+    if (isMoblie) {
+        return res.status(result.statusCode).send({ message, token });
+    }
+
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(result.statusCode).send({ message });
 };
