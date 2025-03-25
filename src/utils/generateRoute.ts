@@ -1,3 +1,4 @@
+import 'tsconfig-paths/register';
 import inquirer from 'inquirer';
 import fs from 'fs';
 import path from 'path';
