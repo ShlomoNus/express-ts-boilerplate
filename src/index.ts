@@ -1,4 +1,3 @@
-import 'tsconfig-paths/register';
 import { Server } from 'http';
 import { CONFIG } from './config';
 import { server } from './server';
